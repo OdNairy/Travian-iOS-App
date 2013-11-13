@@ -214,7 +214,7 @@ static bool firstTime = true;
 	cell.textLabel.text = text;
 	
 	[AppDelegate setDarkCellAppearance:cell forIndexPath:indexPath];
-	
+	cell.backgroundColor = [UIColor darkGrayColor];
     return cell;
 }
 

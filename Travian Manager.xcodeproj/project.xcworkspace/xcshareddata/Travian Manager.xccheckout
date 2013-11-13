@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1ABC066F-1846-48AA-8DA2-92E887BABCB2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Travian Manager</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1C386DED-EF9B-4F12-9FA0-0DF214441BAE</key>
+		<string>ssh://github.com/matejkramny/MKModalOverlay.git</string>
+		<key>225E32A1-282F-47C5-BFAE-F4557AF1F798</key>
+		<string>https://github.com/matejkramny/Travian-iOS-App</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Travian Manager.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1C386DED-EF9B-4F12-9FA0-0DF214441BAE</key>
+		<string>../../Travian Manager/MKModalOverlay</string>
+		<key>225E32A1-282F-47C5-BFAE-F4557AF1F798</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/matejkramny/Travian-iOS-App</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>225E32A1-282F-47C5-BFAE-F4557AF1F798</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1C386DED-EF9B-4F12-9FA0-0DF214441BAE</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MKModalOverlay</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>225E32A1-282F-47C5-BFAE-F4557AF1F798</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Travian-iOS-App</string>
+		</dict>
+	</array>
+</dict>
+</plist>
