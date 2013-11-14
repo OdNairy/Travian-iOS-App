@@ -19,8 +19,8 @@
     __weak TMStorage *storage;
     UIViewController *currentViewController;
     NSIndexPath *currentViewControllerIndexPath;
-    bool showsVillage;
-    NSIndexPath *currentVillageIndexPath; // indexpath of active village
+    BOOL showsVillage;
+    NSIndexPath *currentVillageIndexPath; // indexPath of active village
     NSIndexPath *lastVillageIndexPath;
 }
 
@@ -28,7 +28,7 @@
 
 @implementation TMSidePanelLeftViewController
 
-static bool firstTime = true;
+static BOOL firstTime = true;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -158,6 +158,7 @@ static bool firstTime = true;
                     text = NSLocalizedString(@"Farm List", @"Sidebar cell text");
                     cell.imageView.image = farmlistImage;
                     break;
+                default:break;
             }
         } else {
             // Movements & constructions section / events
@@ -196,6 +197,7 @@ static bool firstTime = true;
                     text = NSLocalizedString(@"Settings", @"Title of the Settings view");
                     cell.imageView.image = settingsImage;
                     break;
+                default:break;
             }
         } else {
             [cell setIndentTitle:NO];
@@ -260,7 +262,7 @@ static bool firstTime = true;
 #pragma mark - Table view delegate
 
 - (void)transitionTableContent:(UITableView *)tableView {
-    // Animates the tableview reload
+    // Animates the tableView reload
     CATransition *transition = [CATransition animation];
     [transition setType:kCATransitionPush];
     [transition setTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];

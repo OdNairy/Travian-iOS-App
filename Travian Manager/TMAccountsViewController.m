@@ -260,9 +260,7 @@
     if (canSkipLoading) {
         [hud hide:YES];
 
-        [storage.account removeObserver:self forKeyPath:@"notificationPending"];
-        [storage.account removeObserver:self forKeyPath:@"progressIndicator"];
-        [storage.account removeObserver:self forKeyPath:@"status"];
+        [self purgeObservers];
 
         [[self tableView] deselectRowAtIndexPath:[[self tableView] indexPathForSelectedRow] animated:YES];
 
@@ -276,9 +274,7 @@
     [hud removeGestureRecognizer:tapGestureRecognizer];
     tapGestureRecognizer = nil;
 
-    [storage.account removeObserver:self forKeyPath:@"notificationPending"];
-    [storage.account removeObserver:self forKeyPath:@"progressIndicator"];
-    [storage.account removeObserver:self forKeyPath:@"status"];
+    [self purgeObservers];
 
     [storage deactivateActiveAccount];
 
@@ -298,20 +294,19 @@
     if ([self isEditing]) {
         // Editing account
         [self performSegueWithIdentifier:@"NewAccount" sender:self];
-    }
-    else {
+    } else {
         // Open selected account
-        TMAccount *a = [[storage accounts] objectAtIndex:indexPath.row];
+        TMAccount *account = [[storage accounts] objectAtIndex:indexPath.row];
 
-        if ([[a password] length] == 0) {
-            passwordPromptView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password required", @"Title of popup displayed when there is no password during login") message:[NSString stringWithFormat:NSLocalizedString(@"Please enter password for account %@", @"Prompts the user to enter password"), [a name]] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
+        if (account.password.length > 0) {
+            [self logIn:account withPasword:[account password]];
+        } else {
+            passwordPromptView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Password required", @"Title of popup displayed when there is no password during login") message:[NSString stringWithFormat:NSLocalizedString(@"Please enter password for account %@", @"Prompts the user to enter password"), [account name]] delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) otherButtonTitles:NSLocalizedString(@"Continue", nil), nil];
             [passwordPromptView setAlertViewStyle:UIAlertViewStyleSecureTextInput];
             [passwordPromptView show];
 
-            return;
         }
 
-        [self logIn:a withPasword:[a password]];
     }
 }
 
@@ -319,9 +314,13 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqualToString:@"notificationPending"]) {
-        NSNumber *n = [change objectForKey:NSKeyValueChangeNewKey];
-        if ([n boolValue] == YES) {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Notification pending", @"Title of popup when there is a notification pending") message:NSLocalizedString(@"There is a Travian notification pending review.", @"Text of popup when there is a notification pending") delegate:self cancelButtonTitle:NSLocalizedString(@"Continue", nil) otherButtonTitles:NSLocalizedString(@"View", nil), nil];
+        NSNumber *notificationPendingValue = [change objectForKey:NSKeyValueChangeNewKey];
+        if ([notificationPendingValue boolValue]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Notification pending", @"Title of popup when there is a notification pending")
+                                                            message:NSLocalizedString(@"There is a Travian notification pending review.", @"Text of popup when there is a notification pending")
+                                                           delegate:self
+                                                  cancelButtonTitle:NSLocalizedString(@"Continue", nil)
+                                                  otherButtonTitles:NSLocalizedString(@"View", nil), nil];
             [alert show];
         }
     } else if ([keyPath isEqualToString:@"progressIndicator"]) {
@@ -335,7 +334,7 @@
         }
     } else if ([keyPath isEqualToString:@"status"]) {
         // Checks for change of account status
-        AccountStatus stat = [[change objectForKey:NSKeyValueChangeNewKey] intValue];
+        AccountStatus stat = (AccountStatus) [[change objectForKey:NSKeyValueChangeNewKey] intValue];
         if ((stat & AConnectionFailed) != 0) {
             // The connection failed
             hud.labelText = NSLocalizedString(@"Connection failed", @"Shown on HUD when the connection fails");
@@ -352,9 +351,7 @@
                 //[tracker sendEventWithCategory:@"security" withAction:@"prompt" withLabel:@"enter password" withValue:[NSNumber numberWithInt:10]];
             }
 
-            [storage.account removeObserver:self forKeyPath:@"notificationPending"];
-            [storage.account removeObserver:self forKeyPath:@"progressIndicator"];
-            [storage.account removeObserver:self forKeyPath:@"status"];
+            [self purgeObservers];
             [hud hide:YES];
             [hud removeGestureRecognizer:tapGestureRecognizer];
             tapGestureRecognizer = nil;
@@ -380,15 +377,19 @@
 
             [hud hide:YES afterDelay:0.6];
 
-            [storage.account removeObserver:self forKeyPath:@"notificationPending"];
-            [storage.account removeObserver:self forKeyPath:@"progressIndicator"];
-            [storage.account removeObserver:self forKeyPath:@"status"];
+            [self purgeObservers];
 
             //[[self tableView] deselectRowAtIndexPath:[[self tableView] indexPathForSelectedRow] animated:YES];
 
             [self performSelector:@selector(dismissView) withObject:self afterDelay:0.6];
         }
     }
+}
+
+- (void)purgeObservers {
+    [storage.account removeObserver:self forKeyPath:@"notificationPending"];
+    [storage.account removeObserver:self forKeyPath:@"progressIndicator"];
+    [storage.account removeObserver:self forKeyPath:@"status"];
 }
 
 #pragma mark UIAlertViewDelegate
@@ -421,9 +422,7 @@
         // Cancel log in
         [hud hide:YES];
 
-        [storage.account removeObserver:self forKeyPath:@"notificationPending"];
-        [storage.account removeObserver:self forKeyPath:@"progressIndicator"];
-        [storage.account removeObserver:self forKeyPath:@"status"];
+        [self purgeObservers];
 
         [[self tableView] deselectRowAtIndexPath:[[self tableView] indexPathForSelectedRow] animated:YES];
     } else if (buttonIndex == 0) {

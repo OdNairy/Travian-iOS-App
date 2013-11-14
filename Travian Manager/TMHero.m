@@ -66,7 +66,7 @@
     attributeString = [[attribute findChildWithAttribute:@"class" matchingName:@"value" allowPartial:NO] contents];
     resourceProductionPoints = [attributeString intValue];
 
-    // resouceProductionBoost
+    // resourceProductionBoost
     attribute = [node findChildWithAttribute:@"id" matchingName:@"setResource" allowPartial:NO];
     NSArray *resourcesArray = [attribute findChildTags:@"div"];
     int activeResource = 0; // Which resource is hero boosting

@@ -55,12 +55,7 @@
 #pragma mark - Start Quest
 
 - (BOOL)canStartQuest:(TMHero *)hero {
-
-    if (![hero isAlive]) // check if hero is dead
-        return false;
-
-    return true;
-
+    return [hero isAlive];
 }
 
 - (BOOL)recommendedToStartQuestWithHero:(TMHero *)hero {
