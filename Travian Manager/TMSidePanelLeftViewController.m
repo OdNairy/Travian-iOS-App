@@ -46,15 +46,12 @@ static bool firstTime = true;
 	[self.tableView setBackgroundColor:backgroundImage];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewWillAppear:(BOOL)animated {
 	storage = [TMStorage sharedStorage];
-	[self.tableView setFrame:CGRectMake(0, 0, 256, 460)];
+    CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
+    CGFloat topPaging = 20;
+    self.view.backgroundColor = [UIColor clearColor];
+	[self.tableView setFrame:CGRectMake(0, topPaging, 256, screenHeight-topPaging)];
 	
 	if (firstTime) {
 		firstTime = false;
@@ -214,7 +211,7 @@ static bool firstTime = true;
 	cell.textLabel.text = text;
 	
 	[AppDelegate setDarkCellAppearance:cell forIndexPath:indexPath];
-	cell.backgroundColor = [UIColor darkGrayColor];
+	cell.backgroundColor = [UIColor lightGrayColor];
     return cell;
 }
 

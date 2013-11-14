@@ -99,6 +99,16 @@
 }
 
 - (void)scheduleNotification:(NSDate *)date withMessageTitle:(NSString *)title {
+    
+    UILocalNotification* local = [[UILocalNotification alloc] init];
+    local.fireDate = date;
+    local.alertBody = title;
+    local.soundName = UILocalNotificationDefaultSoundName;
+    local.applicationIconBadgeNumber = 1;
+    [[UIApplication sharedApplication] scheduleLocalNotification:local];
+    return;
+    
+    
 	NSString *postData = [[NSString alloc] initWithFormat:@"token=%@&deliveryTime=%d&title=%@&%@", token, (int)[date timeIntervalSince1970], title, metadata];
 	NSData *myRequestData = [NSData dataWithBytes: [postData UTF8String] length: [postData length]];
 	

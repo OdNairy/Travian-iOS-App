@@ -7,6 +7,10 @@
 #import "TMVillageResourcesViewController.h"
 #import "TMVillageTroopsViewController.h"
 #import "TMVillageBuildingsViewController.h"
+#import "TMStorage.h"
+#import "TMAccount.h"
+#import "TMVillage.h"
+#import "TMConstruction.h"
 
 @interface TMSidePanelViewController () {
 }
@@ -40,10 +44,30 @@ static TMSidePanelViewController *instance;
 	
 	[self setLeftPanel:[self.storyboard instantiateViewControllerWithIdentifier:@"sidebarVillage"]];
 	[self setCenterPanel:[self getMessages]];
+    [[self view] setBackgroundColor:[UIColor lightGrayColor]];
 }
 
 + (TMSidePanelViewController *)sharedInstance {
 	return instance;
+}
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    TMAccount* account = [TMStorage sharedStorage].account;
+    for (TMVillage* village in account.villages) {
+        for (TMConstruction* task in village.constructions) {
+            UILocalNotification* local = [[UILocalNotification alloc] init];
+            local.fireDate = task.finishTime;
+            local.alertBody = [NSString stringWithFormat:@"'%@' FINISHED: %@ at %d",village.name,task.name,task.level];
+            local.soundName = UILocalNotificationDefaultSoundName;
+            local.applicationIconBadgeNumber = 1;
+            
+            [[UIApplication sharedApplication] scheduleLocalNotification:local];
+            
+            NSLog(@"Village %@ task: %@ to %d at %@ [class = %@]",village.name,task.name,task.level,task.finishTime,NSStringFromClass([task class]));
+        }
+    }
 }
 
 - (void)dealloc {

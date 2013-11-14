@@ -52,7 +52,11 @@ void uncaughtExceptionHandler(NSException *exception) {
 	} else {
 		hasExpired = true;
 	}
-	
+//    
+//    [[UIApplication sharedApplication]registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound)];
+    
+    
+    
 	return YES;
 }
 
