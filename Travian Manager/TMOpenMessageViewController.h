@@ -26,9 +26,9 @@
 @class TMOpenMessageViewController;
 
 typedef enum {
-	ReplyAction = 1 << 1,
-	ForwardAction = 1 << 2,
-	NoAction = 0
+    ReplyAction = 1 << 1,
+    ForwardAction = 1 << 2,
+    NoAction = 0
 } OpenMessageAction;
 
 @protocol TMOpenMessageViewControllerDelegate <NSObject>
@@ -43,8 +43,8 @@ typedef enum {
 
 @interface TMOpenMessageViewController : UITableViewController <UITableViewDataSource>
 
-@property (weak, nonatomic) id<TMOpenMessageViewControllerDelegate> delegate;
-@property (weak, nonatomic) TMMessage *message;
+@property(weak, nonatomic) id <TMOpenMessageViewControllerDelegate> delegate;
+@property(weak, nonatomic) TMMessage *message;
 
 - (IBAction)deleteMessage:(id)sender;
 - (IBAction)reply:(id)sender;

@@ -32,8 +32,8 @@
 
 @interface TMAccountDetailsViewController : UITableViewController <UIActionSheetDelegate, UITextFieldDelegate>
 
-@property (nonatomic, weak) id <TMAccountDetailsViewControllerDelegate> delegate;
-@property (nonatomic, weak) TMAccount *editingAccount;
+@property(nonatomic, weak) id <TMAccountDetailsViewControllerDelegate> delegate;
+@property(nonatomic, weak) TMAccount *editingAccount;
 
 - (IBAction)done:(id)sender;
 - (IBAction)cancel:(id)sender;

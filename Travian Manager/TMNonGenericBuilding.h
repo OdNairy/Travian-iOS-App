@@ -22,6 +22,6 @@
 
 @interface TMNonGenericBuilding : TMBuilding
 
-@property (assign) bool superFinishedLoading; // Tool for loading extra pages than just the building page. (as a superclass...)
+@property(assign) bool superFinishedLoading; // Tool for loading extra pages than just the building page. (as a superclass...)
 
 @end

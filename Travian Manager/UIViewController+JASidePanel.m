@@ -33,7 +33,7 @@
     UIViewController *iter = self.parentViewController;
     while (iter) {
         if ([iter isKindOfClass:[JASidePanelController class]]) {
-            return (JASidePanelController *)iter;
+            return (JASidePanelController *) iter;
         } else if (iter.parentViewController && iter.parentViewController != iter) {
             iter = iter.parentViewController;
         } else {

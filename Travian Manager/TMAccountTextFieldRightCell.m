@@ -24,8 +24,7 @@
 @synthesize label;
 @synthesize textField;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
@@ -33,15 +32,14 @@
     return self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
 
-- (void)configure:(id<UITextFieldDelegate>)delegate {
-	textField.delegate = delegate;
+- (void)configure:(id <UITextFieldDelegate>)delegate {
+    textField.delegate = delegate;
 }
 
 @end

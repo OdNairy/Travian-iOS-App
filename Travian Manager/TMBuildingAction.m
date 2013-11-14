@@ -35,62 +35,62 @@
 @synthesize name, resources, url;
 
 - (id)initWithResearchDiv:(HTMLNode *)research {
-	self = [super init];
-	if (self) {
-		[self fetchFromResearchDiv:research];
-	}
-	
-	return self;
+    self = [super init];
+    if (self) {
+        [self fetchFromResearchDiv:research];
+    }
+
+    return self;
 }
 
 - (void)fetchFromResearchDiv:(HTMLNode *)research {
-	HTMLNode *inf = [research findChildOfClass:@"information"];
-	
-	name = [[[[inf findChildOfClass:@"title"] findChildTags:@"a"] lastObject] contents];
-	
-	resources = [[TMResources alloc] init];
-	NSArray *spans = [[inf findChildOfClass:@"costs"] findChildTags:@"span"];
-	NSMutableArray *spansParsed = [[NSMutableArray alloc] initWithCapacity:4];
-	for (int i = 0; i < 4; i++) {
-		HTMLNode *span = [spans objectAtIndex:i];
-		
-		NSString *img = [[span findChildTag:@"img"] rawContents];
-		NSString *raw = [span rawContents];
-		
-		raw = [raw stringByReplacingOccurrencesOfString:img withString:@""];
-		
-		NSError *error;
-		HTMLParser *p = [[HTMLParser alloc] initWithString:raw error:&error];
-		if (error) {
-			continue;
-		}
-		
-		[spansParsed addObject:[NSNumber numberWithInt:[[[[[p body] findChildTag:@"span"] contents] stringByTrimmingCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] intValue]]];
-	}
-	
-	resources.wood = [[spansParsed objectAtIndex:0] intValue];// Wood
-	resources.clay = [[spansParsed objectAtIndex:1] intValue];// Clay
-	resources.iron = [[spansParsed objectAtIndex:2] intValue];// Iron
-	resources.wheat = [[spansParsed objectAtIndex:3] intValue];// Wheat
-	
-	HTMLNode *button = [[inf findChildOfClass:@"contractLink"] findChildTag:@"button"];
-	if (button) {
-		url = [[[button getAttributeNamed:@"onclick"] stringByReplacingOccurrencesOfString:@"window.location.href = '" withString:@""] stringByReplacingOccurrencesOfString:@"'; return false;" withString:@""];
-	} else
-		url = nil;
+    HTMLNode *inf = [research findChildOfClass:@"information"];
+
+    name = [[[[inf findChildOfClass:@"title"] findChildTags:@"a"] lastObject] contents];
+
+    resources = [[TMResources alloc] init];
+    NSArray *spans = [[inf findChildOfClass:@"costs"] findChildTags:@"span"];
+    NSMutableArray *spansParsed = [[NSMutableArray alloc] initWithCapacity:4];
+    for (int i = 0; i < 4; i++) {
+        HTMLNode *span = [spans objectAtIndex:i];
+
+        NSString *img = [[span findChildTag:@"img"] rawContents];
+        NSString *raw = [span rawContents];
+
+        raw = [raw stringByReplacingOccurrencesOfString:img withString:@""];
+
+        NSError *error;
+        HTMLParser *p = [[HTMLParser alloc] initWithString:raw error:&error];
+        if (error) {
+            continue;
+        }
+
+        [spansParsed addObject:[NSNumber numberWithInt:[[[[[p body] findChildTag:@"span"] contents] stringByTrimmingCharactersInSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]] intValue]]];
+    }
+
+    resources.wood = [[spansParsed objectAtIndex:0] intValue];// Wood
+    resources.clay = [[spansParsed objectAtIndex:1] intValue];// Clay
+    resources.iron = [[spansParsed objectAtIndex:2] intValue];// Iron
+    resources.wheat = [[spansParsed objectAtIndex:3] intValue];// Wheat
+
+    HTMLNode *button = [[inf findChildOfClass:@"contractLink"] findChildTag:@"button"];
+    if (button) {
+        url = [[[button getAttributeNamed:@"onclick"] stringByReplacingOccurrencesOfString:@"window.location.href = '" withString:@""] stringByReplacingOccurrencesOfString:@"'; return false;" withString:@""];
+    } else
+        url = nil;
 }
 
 - (void)research {
-	if (url == nil)
-		return;
-	
-	@autoreleasepool {
-		NSURL *URL = [[[TMStorage sharedStorage] account] urlForString:url];
-		NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
-		
-		[req setHTTPShouldHandleCookies:YES];
-		__unused NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:nil startImmediately:YES];
-	}
+    if (url == nil)
+        return;
+
+    @autoreleasepool {
+        NSURL *URL = [[[TMStorage sharedStorage] account] urlForString:url];
+        NSMutableURLRequest *req = [[NSMutableURLRequest alloc] initWithURL:URL cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
+
+        [req setHTTPShouldHandleCookies:YES];
+        __unused NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:req delegate:nil startImmediately:YES];
+    }
 }
 
 @end

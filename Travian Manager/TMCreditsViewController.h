@@ -6,6 +6,6 @@
 
 @interface TMCreditsViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property(weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

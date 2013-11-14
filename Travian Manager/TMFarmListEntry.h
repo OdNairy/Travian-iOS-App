@@ -10,9 +10,9 @@
 
 @interface TMFarmListEntry : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
-@property (nonatomic, strong) NSString *name; // Name of the farm list
-@property (nonatomic, strong) NSString *postData; // POST data (from hidden inputs)
-@property (nonatomic, strong) NSArray *farms; // container with TMFarmListEntryFarms
+@property(nonatomic, strong) NSString *name; // Name of the farm list
+@property(nonatomic, strong) NSString *postData; // POST data (from hidden inputs)
+@property(nonatomic, strong) NSArray *farms; // container with TMFarmListEntryFarms
 
 - (void)executeWithCompletion:(void (^)())completion;
 

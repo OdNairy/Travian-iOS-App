@@ -24,11 +24,11 @@
 
 @interface TMVillageBarracksCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UITextField *many;
-@property (weak, nonatomic) TMTroop *troop; // Updates troops count property when user changes value of self.many
-@property (weak, nonatomic) IBOutlet UILabel *resources;
-@property (weak, nonatomic) IBOutlet UILabel *otherDetails;
+@property(weak, nonatomic) IBOutlet UILabel *name;
+@property(weak, nonatomic) IBOutlet UITextField *many;
+@property(weak, nonatomic) TMTroop *troop; // Updates troops count property when user changes value of self.many
+@property(weak, nonatomic) IBOutlet UILabel *resources;
+@property(weak, nonatomic) IBOutlet UILabel *otherDetails;
 
 - (void)configure;
 - (void)updateTextLabels;

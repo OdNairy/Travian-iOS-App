@@ -25,21 +25,21 @@
 
 // QD = QuestDifficulty
 typedef enum {
-	QD_NORMAL = 1,
-	QD_VERY_HARD = 0
+    QD_NORMAL = 1,
+    QD_VERY_HARD = 0
 } questDifficulty;
 
 @interface TMHeroQuest : NSObject <NSCoding, NSURLConnectionDelegate, NSURLConnectionDataDelegate> {
-	NSURLConnection *url; // URL to start adventure
-	NSMutableData *urlData; // Stores HTML downloaded
+    NSURLConnection *url; // URL to start adventure
+    NSMutableData *urlData; // Stores HTML downloaded
 }
 
-@property (assign) questDifficulty difficulty; // Defines how difficult quest is
-@property (assign) int duration; // How long the quest is (in seconds)
-@property (strong, nonatomic) NSDate *expiry; // When the quest expires
-@property (assign) int x; // Where the quest is on X axis
-@property (assign) int y; // Where the quest is on Y axis
-@property (assign) int kid; // ID of the Quest
+@property(assign) questDifficulty difficulty; // Defines how difficult quest is
+@property(assign) int duration; // How long the quest is (in seconds)
+@property(strong, nonatomic) NSDate *expiry; // When the quest expires
+@property(assign) int x; // Where the quest is on X axis
+@property(assign) int y; // Where the quest is on Y axis
+@property(assign) int kid; // ID of the Quest
 
 - (BOOL)canStartQuest:(TMHero *)account;
 - (BOOL)recommendedToStartQuestWithHero:(TMHero *)hero;

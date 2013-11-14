@@ -25,9 +25,9 @@
 
 @interface TMBuildingAction : NSObject
 
-@property (nonatomic, strong) NSString *name;
-@property (nonatomic, strong) TMResources *resources;
-@property (nonatomic, strong) NSString *url;
+@property(nonatomic, strong) NSString *name;
+@property(nonatomic, strong) TMResources *resources;
+@property(nonatomic, strong) NSString *url;
 
 - (id)initWithResearchDiv:(HTMLNode *)research;
 - (void)research;

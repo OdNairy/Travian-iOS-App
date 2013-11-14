@@ -24,8 +24,7 @@
 
 @synthesize messageDelegate;
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
@@ -34,19 +33,19 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-	CGRect frame = textView.frame;
-	frame.size.height = textView.contentSize.height;
-	textView.frame = frame;
-	
-	[messageDelegate textView:self textChanged:frame.size.height];
+    CGRect frame = textView.frame;
+    frame.size.height = textView.contentSize.height;
+    textView.frame = frame;
+
+    [messageDelegate textView:self textChanged:frame.size.height];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
-	CGRect frame = textView.frame;
-	frame.size.height = textView.contentSize.height;
-	textView.frame = frame;
-	
-	[messageDelegate textView:self textChanged:frame.size.height];
+    CGRect frame = textView.frame;
+    frame.size.height = textView.contentSize.height;
+    textView.frame = frame;
+
+    [messageDelegate textView:self textChanged:frame.size.height];
 }
 
 @end

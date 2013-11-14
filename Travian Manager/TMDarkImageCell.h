@@ -6,6 +6,6 @@
 
 @interface TMDarkImageCell : UITableViewCell
 
-@property (assign) bool indentTitle;
+@property(assign) bool indentTitle;
 
 @end

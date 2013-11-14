@@ -24,6 +24,6 @@
 
 @interface TMVillageResearchViewController : UITableViewController
 
-@property (nonatomic, weak) TMBuildingAction *action;
+@property(nonatomic, weak) TMBuildingAction *action;
 
 @end

@@ -28,6 +28,6 @@
 
 @interface TMMessageContentTextView : UITextView <UITextViewDelegate>
 
-@property (weak, nonatomic) id<TMMessageContentDelegate> messageDelegate;
+@property(weak, nonatomic) id <TMMessageContentDelegate> messageDelegate;
 
 @end

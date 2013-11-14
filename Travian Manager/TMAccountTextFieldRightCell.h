@@ -22,9 +22,9 @@
 
 @interface TMAccountTextFieldRightCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (weak, nonatomic) IBOutlet UITextField *textField;
+@property(weak, nonatomic) IBOutlet UILabel *label;
+@property(weak, nonatomic) IBOutlet UITextField *textField;
 
-- (void)configure:(id<UITextFieldDelegate>) delegate;
+- (void)configure:(id <UITextFieldDelegate>)delegate;
 
 @end

@@ -6,6 +6,6 @@
 
 @implementation TMFarmListEntryFarm
 
-@synthesize distance,postName, targetName, targetPopulation, troops, selected, lastReport, lastReportTime, lastReportBounty, lastReportURL, attackInProgress;
+@synthesize distance, postName, targetName, targetPopulation, troops, selected, lastReport, lastReportTime, lastReportBounty, lastReportURL, attackInProgress;
 
 @end

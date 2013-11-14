@@ -22,7 +22,7 @@
 
 @interface TMDeleteCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIButton *button;
+@property(weak, nonatomic) IBOutlet UIButton *button;
 
 - (IBAction)buttonTouched:(id)sender;
 - (void)configure;

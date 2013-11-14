@@ -13,101 +13,99 @@
 
 // Singleton
 + (TMStorage *)sharedStorage {
-	static TMStorage *sharedStorage;
-	
-	@synchronized(self)
-	{
-		if (!sharedStorage)
-			sharedStorage = [[TMStorage alloc] init];
-		
-		return sharedStorage;
-	}
+    static TMStorage *sharedStorage;
+
+    @synchronized (self) {
+        if (!sharedStorage)
+            sharedStorage = [[TMStorage alloc] init];
+
+        return sharedStorage;
+    }
 }
 
 - (id)init {
-	static NSString *accountsPath = @"Accounts.plist";
-	static NSString *appSettingsPath = @"ApplicationSettings.plist";
-	
-	self = [super init];
-	
-	if (self)
-	{
-		// Get the paths
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *documentsDirectory = [paths objectAtIndex:0];
-		savePath = [documentsDirectory stringByAppendingPathComponent:accountsPath];
-		appSettingsSavePath = [documentsDirectory stringByAppendingPathComponent:appSettingsPath];
-		
-		[self loadData];
-	}
-	
-	return self;
+    static NSString *accountsPath = @"Accounts.plist";
+    static NSString *appSettingsPath = @"ApplicationSettings.plist";
+
+    self = [super init];
+
+    if (self) {
+        // Get the paths
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        savePath = [documentsDirectory stringByAppendingPathComponent:accountsPath];
+        appSettingsSavePath = [documentsDirectory stringByAppendingPathComponent:appSettingsPath];
+
+        [self loadData];
+    }
+
+    return self;
 }
 
 #pragma mark - Data Saving
 
 - (BOOL)saveData {
-	// Data
-	NSData *accountData = [NSKeyedArchiver archivedDataWithRootObject:accounts];
-	NSData *appSettingsData = [NSKeyedArchiver archivedDataWithRootObject:appSettings];
-	
-	@try {
-		// Write the data
-		NSError *error = nil;
-		NSError *settingsError = nil;
-		if ([accountData writeToFile:savePath options:NSDataWritingAtomic error:&error] && [appSettingsData writeToFile:appSettingsSavePath options:NSDataWritingAtomic error:&settingsError]) {
-			return true;
-		} else {
-			return false;
-		}
-	} @catch (id exception) {
-		NSLog(@"Crashed while saving data %@", [(NSException *)exception description]);
-	}
+    // Data
+    NSData *accountData = [NSKeyedArchiver archivedDataWithRootObject:accounts];
+    NSData *appSettingsData = [NSKeyedArchiver archivedDataWithRootObject:appSettings];
+
+    @try {
+        // Write the data
+        NSError *error = nil;
+        NSError *settingsError = nil;
+        if ([accountData writeToFile:savePath options:NSDataWritingAtomic error:&error] && [appSettingsData writeToFile:appSettingsSavePath options:NSDataWritingAtomic error:&settingsError]) {
+            return true;
+        } else {
+            return false;
+        }
+    } @catch (id exception) {
+        NSLog(@"Crashed while saving data %@", [(NSException *) exception description]);
+    }
 }
 
 - (BOOL)loadData {
-	NSData *accountData = [NSData dataWithContentsOfFile:savePath];
-	NSData *appSettingsData = [NSData dataWithContentsOfFile:appSettingsSavePath];
-	
-	bool result = false;
-	
-	accounts = [NSKeyedUnarchiver unarchiveObjectWithData:accountData];
-	appSettings = [NSKeyedUnarchiver unarchiveObjectWithData:appSettingsData];
-	if (accounts == nil)
-		accounts = [[NSArray alloc] init];
-	else
-		result = true;
-	if (appSettings == nil)
-		appSettings = [[TMApplicationSettings alloc] init];
-	else
-		result = result == false ? false : true;
-	
-	account = nil;
-	
-	return result;
+    NSData *accountData = [NSData dataWithContentsOfFile:savePath];
+    NSData *appSettingsData = [NSData dataWithContentsOfFile:appSettingsSavePath];
+
+    bool result = false;
+
+    accounts = [NSKeyedUnarchiver unarchiveObjectWithData:accountData];
+    appSettings = [NSKeyedUnarchiver unarchiveObjectWithData:appSettingsData];
+    if (accounts == nil)
+        accounts = [[NSArray alloc] init];
+    else
+        result = true;
+    if (appSettings == nil)
+        appSettings = [[TMApplicationSettings alloc] init];
+    else
+        result = result == false ? false : true;
+
+    account = nil;
+
+    return result;
 }
 
 - (NSString *)getSavePath {
-	return savePath;
+    return savePath;
 }
 
 #pragma mark - Active Account
 
 - (void)setActiveAccount:(TMAccount *)a {
-	[self setActiveAccount:a withPassword:[a password]];
+    [self setActiveAccount:a withPassword:[a password]];
 }
 
 - (void)setActiveAccount:(TMAccount *)a withPassword:(NSString *)password {
-	self.account = a;
-	
-	[self.account activateAccountWithPassword:password];
+    self.account = a;
+
+    [self.account activateAccountWithPassword:password];
 }
 
 - (void)deactivateActiveAccount {
-	if (account)
-		[account deactivateAccount];
-	
-	account = nil;
+    if (account)
+        [account deactivateAccount];
+
+    account = nil;
 }
 
 @end

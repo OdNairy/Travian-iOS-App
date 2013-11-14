@@ -32,6 +32,6 @@
 
 - (id)initWithBuildings:(NSArray *)buildings hideBuildings:(NSArray *)hideBuildings;
 
-@property (weak, nonatomic) id <TMBuildingMapProtocol>delegate;
+@property(weak, nonatomic) id <TMBuildingMapProtocol> delegate;
 
 @end

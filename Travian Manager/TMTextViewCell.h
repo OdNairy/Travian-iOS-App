@@ -24,6 +24,6 @@
 
 @interface TMTextViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet TMMessageContentTextView *textView;
+@property(weak, nonatomic) IBOutlet TMMessageContentTextView *textView;
 
 @end

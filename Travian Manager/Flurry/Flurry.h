@@ -95,7 +95,7 @@
  *  @param value @c YES to show debug logs, @c NO to omit debug logs.
  *
  */
-+ (void)setDebugLogEnabled:(BOOL)value;	
++ (void)setDebugLogEnabled:(BOOL)value;
 
 /*!
  *  @brief Set the timeout for expiring a Flurry session.
@@ -201,7 +201,7 @@
  * @param options passed launchOptions from the applicatin's didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
  
  */
-+ (void) startSession:(NSString *)apiKey withOptions:(id)options;
++ (void)startSession:(NSString *)apiKey withOptions:(id)options;
 
 
 /** @name Event and Error Logging
@@ -471,7 +471,7 @@
  *  that can be easily understood by non-technical people in your business domain.
  *  @param parameters A map containing Name-Value pairs of parameters.
  */
-+ (void)endTimedEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters;	// non-nil parameters will update the parameters
++ (void)endTimedEvent:(NSString *)eventName withParameters:(NSDictionary *)parameters;    // non-nil parameters will update the parameters
 
 //@}
 
@@ -504,7 +504,7 @@
  * 
  *  @param target The navigation or tab bar controller.
  */
-+ (void)logAllPageViews:(id)target;		
++ (void)logAllPageViews:(id)target;
 
 /*!
  *  @brief Explicitly track a page view during a session.
@@ -542,7 +542,7 @@
  *
  *  @param userID The app id for a user.
  */
-+ (void)setUserID:(NSString *)userID;	
++ (void)setUserID:(NSString *)userID;
 
 /*!
  *  @brief Set your user's age in years.
@@ -573,7 +573,7 @@
  *  @param gender Reported gender of user.
  *
  */
-+ (void)setGender:(NSString *)gender;	// user's gender m or f
++ (void)setGender:(NSString *)gender;    // user's gender m or f
 
 //@}
 
@@ -637,7 +637,7 @@
  *  @param sendSessionReportsOnClose YES to send on close, NO to omit reporting on close.
  *
  */
-+ (void)setSessionReportsOnCloseEnabled:(BOOL)sendSessionReportsOnClose;	
++ (void)setSessionReportsOnCloseEnabled:(BOOL)sendSessionReportsOnClose;
 
 /*!
  *  @brief Set session to report when app is sent to the background.

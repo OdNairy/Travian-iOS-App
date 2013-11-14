@@ -22,8 +22,8 @@
 
 @interface TMBarracks : TMNonGenericBuilding
 
-@property (nonatomic, strong) NSArray *troops;
-@property (nonatomic, strong) NSDictionary *researching;
+@property(nonatomic, strong) NSArray *troops;
+@property(nonatomic, strong) NSDictionary *researching;
 
 - (bool)train;
 

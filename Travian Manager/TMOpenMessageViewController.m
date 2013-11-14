@@ -27,9 +27,9 @@
 #import "AppDelegate.h"
 
 @interface TMOpenMessageViewController () <UIActionSheetDelegate> {
-	bool didCloseReply;
-	NSArray *cells;
-	UIActionSheet *optionsActionSheet;
+    bool didCloseReply;
+    NSArray *cells;
+    UIActionSheet *optionsActionSheet;
 }
 
 - (void)buildCells;
@@ -41,8 +41,7 @@
 @synthesize message;
 @synthesize delegate;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -50,42 +49,40 @@
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	
-	//[self.tableView setBackgroundColor:[UIColor whiteColor]];
-	
-	cells = @[];
+
+    //[self.tableView setBackgroundColor:[UIColor whiteColor]];
+
+    cells = @[];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-	[self setTitle:message.title];
+    [super viewWillAppear:animated];
+
+    [self setTitle:message.title];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[super viewDidAppear:animated];
+    [super viewDidAppear:animated];
 }
 
-- (void)viewDidUnload
-{
-	[self setMessage:nil];
+- (void)viewDidUnload {
+    [self setMessage:nil];
     [super viewDidUnload];
 }
 
 - (void)configure {
-	[self buildCells];
-	[self.tableView reloadData];
+    [self buildCells];
+    [self.tableView reloadData];
 }
 
 - (IBAction)menuBarPressed:(id)sender {
-	if (!optionsActionSheet) {
-		optionsActionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Reply", nil), NSLocalizedString(@"Forward", nil), NSLocalizedString(@"Archive", nil), NSLocalizedString(@"Delete", nil), nil];
-	}
-	
-	[optionsActionSheet showFromRect:CGRectMake(0, 0, [self.view frame].size.width, [self.view frame].size.height) inView:self.view animated:YES];
+    if (!optionsActionSheet) {
+        optionsActionSheet = [[UIActionSheet alloc] initWithTitle:@"" delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Reply", nil), NSLocalizedString(@"Forward", nil), NSLocalizedString(@"Archive", nil), NSLocalizedString(@"Delete", nil), nil];
+    }
+
+    [optionsActionSheet showFromRect:CGRectMake(0, 0, [self.view frame].size.width, [self.view frame].size.height) inView:self.view animated:YES];
 }
 
 static NSString *rightDetailCellIdentifier = @"RightDetailCell";
@@ -93,40 +90,42 @@ static NSString *messageContentCellIdentifier = @"MessageContentCell";
 static NSString *subjectCellIdentifier = @"SubjectCell";
 
 - (void)buildCells {
-	UITableViewCell *fromCell = [self.tableView dequeueReusableCellWithIdentifier:rightDetailCellIdentifier];
-	fromCell.textLabel.text = NSLocalizedString(@"Sender", @"Sender of a message");
-	fromCell.detailTextLabel.text = [message sender];
-	
-	UITableViewCell *subjectCell = [self.tableView dequeueReusableCellWithIdentifier:subjectCellIdentifier];
-	subjectCell.textLabel.text = [message title];
-	subjectCell.detailTextLabel.text = [message when];
-	
-	TMMessageContentCell *contentCell = [self.tableView dequeueReusableCellWithIdentifier:messageContentCellIdentifier];
-	if (!contentCell) {
-		contentCell = [[TMMessageContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:subjectCellIdentifier];
-	}
-	[contentCell configure:message];
-	
-	NSIndexPath *oddPath = [NSIndexPath indexPathForRow:1 inSection:0];
-	NSIndexPath *evenPath = [NSIndexPath indexPathForRow:0 inSection:0];
-	
-	[AppDelegate setCellAppearance:fromCell forIndexPath:evenPath];
-	[AppDelegate setCellAppearance:subjectCell forIndexPath:oddPath];
-	[AppDelegate setCellAppearance:contentCell forIndexPath:evenPath];
-	
-	cells = @[fromCell, subjectCell, contentCell];
+    UITableViewCell *fromCell = [self.tableView dequeueReusableCellWithIdentifier:rightDetailCellIdentifier];
+    fromCell.textLabel.text = NSLocalizedString(@"Sender", @"Sender of a message");
+    fromCell.detailTextLabel.text = [message sender];
+
+    UITableViewCell *subjectCell = [self.tableView dequeueReusableCellWithIdentifier:subjectCellIdentifier];
+    subjectCell.textLabel.text = [message title];
+    subjectCell.detailTextLabel.text = [message when];
+
+    TMMessageContentCell *contentCell = [self.tableView dequeueReusableCellWithIdentifier:messageContentCellIdentifier];
+    if (!contentCell) {
+        contentCell = [[TMMessageContentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:subjectCellIdentifier];
+    }
+    [contentCell configure:message];
+
+    NSIndexPath *oddPath = [NSIndexPath indexPathForRow:1 inSection:0];
+    NSIndexPath *evenPath = [NSIndexPath indexPathForRow:0 inSection:0];
+
+    [AppDelegate setCellAppearance:fromCell forIndexPath:evenPath];
+    [AppDelegate setCellAppearance:subjectCell forIndexPath:oddPath];
+    [AppDelegate setCellAppearance:contentCell forIndexPath:evenPath];
+
+    cells = @[fromCell, subjectCell, contentCell];
 }
 
 #pragma mark Table Data Source
 
 - (int)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1;
+    return 1;
 }
+
 - (int)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [cells count];
+    return [cells count];
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return [cells objectAtIndex:indexPath.row];
+    return [cells objectAtIndex:indexPath.row];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -138,40 +137,40 @@ static NSString *subjectCellIdentifier = @"SubjectCell";
 }
 
 - (BOOL)tableView:(UITableView *)tableview shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
+    return NO;
 }
 
 - (int)tableView:(UITableView *)tableView indentationLevelForRowAtIndexPath:(NSIndexPath *)indexPath {
-	return 0;
+    return 0;
 }
 
 - (BOOL)tableView:(UITableView *)tableview canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	switch (indexPath.row) {
-		case 0:
-		default:
-			return 35;
-		case 1:
-			return 50;
-		case 2:
-			// Content
-			return [(TMMessageContentCell *)[cells objectAtIndex:indexPath.row] getHeight];
-	}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.row) {
+        case 0:
+        default:
+            return 35;
+        case 1:
+            return 50;
+        case 2:
+            // Content
+            return [(TMMessageContentCell *) [cells objectAtIndex:indexPath.row] getHeight];
+    }
 }
 
 #pragma mark - IBAction
 
 - (IBAction)deleteMessage:(id)sender {
-	[[self message] delete];
-	TMAccount *a = [[TMStorage sharedStorage] account];
-	NSMutableArray *ar = [[a messages] mutableCopy];
-	[ar removeObjectIdenticalTo:message];
-	a.messages = [ar copy];
+    [[self message] delete];
+    TMAccount *a = [[TMStorage sharedStorage] account];
+    NSMutableArray *ar = [[a messages] mutableCopy];
+    [ar removeObjectIdenticalTo:message];
+    a.messages = [ar copy];
 }
+
 - (IBAction)reply:(id)sender {
 }
 
@@ -183,33 +182,33 @@ static NSString *subjectCellIdentifier = @"SubjectCell";
 #pragma mark UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (!IsFULL && [AppDelegate hasExpired]) {
-		[AppDelegate displayLiteWarning];
-		return;
-	}
-	
-	switch (buttonIndex) {
-		case 0:
-			// Reply
-			[delegate openMessageViewController:self wantsToReplyToMessage:message];
-			break;
-		case 1:
-			// FWD
-			[delegate openMessageViewController:self wantsToForwardMessage:message];
-			break;
-		case 2:
-			// Archive
-			[delegate openMessageViewController:self didArchiveMessage:message];
-			break;
-		case 3:
-			// Delete
-			[delegate openMessageViewController:self didDeleteMessage:message];
-			break;
-		default:
-			return;
-	}
-	
-	[self.navigationController popViewControllerAnimated:YES];
+    if (!IsFULL && [AppDelegate hasExpired]) {
+        [AppDelegate displayLiteWarning];
+        return;
+    }
+
+    switch (buttonIndex) {
+        case 0:
+            // Reply
+            [delegate openMessageViewController:self wantsToReplyToMessage:message];
+            break;
+        case 1:
+            // FWD
+            [delegate openMessageViewController:self wantsToForwardMessage:message];
+            break;
+        case 2:
+            // Archive
+            [delegate openMessageViewController:self didArchiveMessage:message];
+            break;
+        case 3:
+            // Delete
+            [delegate openMessageViewController:self didDeleteMessage:message];
+            break;
+        default:
+            return;
+    }
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

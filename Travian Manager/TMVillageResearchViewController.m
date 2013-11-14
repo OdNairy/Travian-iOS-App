@@ -25,7 +25,7 @@
 #import "AppDelegate.h"
 
 @interface TMVillageResearchViewController () {
-	MBProgressHUD *HUD;
+    MBProgressHUD *HUD;
 }
 
 - (void)closeView:(id)sender;
@@ -38,8 +38,7 @@
 
 static NSString *viewTitle;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -47,124 +46,118 @@ static NSString *viewTitle;
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	
-	viewTitle = NSLocalizedString(@"Research", @"Research view title");
-	
-	[self.tableView setBackgroundView:nil];
+
+    viewTitle = NSLocalizedString(@"Research", @"Research view title");
+
+    [self.tableView setBackgroundView:nil];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-	[self.navigationItem setTitle:viewTitle];
+    [super viewWillAppear:animated];
+
+    [self.navigationItem setTitle:viewTitle];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return [action url] == nil ? 2 : 3;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	switch (section) {
-		case 0:
-			return 1;
-		case 1:
-			return 4;
-		case 2:
-			return 1;
-		default:
-			return 0;
-	}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    switch (section) {
+        case 0:
+            return 1;
+        case 1:
+            return 4;
+        case 2:
+            return 1;
+        default:
+            return 0;
+    }
 }
 
 static NSString *basicCellID = @"Basic";
 static NSString *selectableCellID = @"Selectable";
 static NSString *resourceCellID = @"Resource";
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell;
-	
-	switch (indexPath.section) {
-		case 0:
-			cell = [tableView dequeueReusableCellWithIdentifier:basicCellID];
-			cell.textLabel.text = action.name;
-			break;
-		case 1:
-			cell = [tableView dequeueReusableCellWithIdentifier:resourceCellID];
-			switch (indexPath.row) {
-				case 0:
-					cell.textLabel.text = NSLocalizedString(@"Wood", nil);
-					cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.wood];
-					break;
-				case 1:
-					cell.textLabel.text = NSLocalizedString(@"Clay", nil);
-					cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.clay];
-					break;
-				case 2:
-					cell.textLabel.text = NSLocalizedString(@"Iron", nil);
-					cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.iron];
-					break;
-				case 3:
-					cell.textLabel.text = NSLocalizedString(@"Wheat", nil);
-					cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.wheat];
-					break;
-			}
-			break;
-		case 2:
-			cell = [tableView dequeueReusableCellWithIdentifier:selectableCellID];
-			cell.textLabel.text = NSLocalizedString(@"Research", nil);
-			[AppDelegate setRoundedCellAppearance:cell forIndexPath:indexPath forLastRow:YES];
-			break;
-	}
-    
+
+    switch (indexPath.section) {
+        case 0:
+            cell = [tableView dequeueReusableCellWithIdentifier:basicCellID];
+            cell.textLabel.text = action.name;
+            break;
+        case 1:
+            cell = [tableView dequeueReusableCellWithIdentifier:resourceCellID];
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = NSLocalizedString(@"Wood", nil);
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.wood];
+                    break;
+                case 1:
+                    cell.textLabel.text = NSLocalizedString(@"Clay", nil);
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.clay];
+                    break;
+                case 2:
+                    cell.textLabel.text = NSLocalizedString(@"Iron", nil);
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.iron];
+                    break;
+                case 3:
+                    cell.textLabel.text = NSLocalizedString(@"Wheat", nil);
+                    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f", action.resources.wheat];
+                    break;
+            }
+            break;
+        case 2:
+            cell = [tableView dequeueReusableCellWithIdentifier:selectableCellID];
+            cell.textLabel.text = NSLocalizedString(@"Research", nil);
+            [AppDelegate setRoundedCellAppearance:cell forIndexPath:indexPath forLastRow:YES];
+            break;
+    }
+
     return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	switch (section) {
-		case 0:
-			return NSLocalizedString(@"Details", nil);
-		case 1:
-			return NSLocalizedString(@"Required resources", nil);
-		default:
-			return @"";
-	}
+    switch (section) {
+        case 0:
+            return NSLocalizedString(@"Details", nil);
+        case 1:
+            return NSLocalizedString(@"Required resources", nil);
+        default:
+            return @"";
+    }
 }
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	if (indexPath.section != 2)
-		return;
-	
-	// Research
-	[action research];
-	
-	[self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-	HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:NO];
-	[HUD setMode:MBProgressHUDModeCustomView];
-	[HUD setCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]]];
-	[HUD setLabelText:NSLocalizedString(@"Done", nil)];
-	[HUD hide:YES afterDelay:0.7];
-	
-	[self performSelector:@selector(closeView:) withObject:self afterDelay:1.2];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section != 2)
+        return;
+
+    // Research
+    [action research];
+
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:NO];
+    [HUD setMode:MBProgressHUDModeCustomView];
+    [HUD setCustomView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]]];
+    [HUD setLabelText:NSLocalizedString(@"Done", nil)];
+    [HUD hide:YES afterDelay:0.7];
+
+    [self performSelector:@selector(closeView:) withObject:self afterDelay:1.2];
 }
 
 - (void)closeView:(id)sender {
-	[[self navigationController] popViewControllerAnimated:YES];
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 
 @end

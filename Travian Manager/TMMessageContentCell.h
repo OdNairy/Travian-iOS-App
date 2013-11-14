@@ -25,8 +25,8 @@
 
 @interface TMMessageContentCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet TMMessageContentTextView *messageContent;
-@property (nonatomic, weak) TMMessage *message;
+@property(nonatomic, weak) IBOutlet TMMessageContentTextView *messageContent;
+@property(nonatomic, weak) TMMessage *message;
 
 - (void)configure;
 - (void)configure:(TMMessage *)message;

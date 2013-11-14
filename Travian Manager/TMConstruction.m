@@ -25,20 +25,20 @@
 @synthesize name, level, finishTime;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-	self = [super init];
-	
-	name = [aDecoder decodeObjectForKey:@"name"];
-	NSNumber *n = [aDecoder decodeObjectForKey:@"level"];
-	level = [n intValue];
-	finishTime = [aDecoder decodeObjectForKey:@"finishTime"];
-	
-	return self;
+    self = [super init];
+
+    name = [aDecoder decodeObjectForKey:@"name"];
+    NSNumber *n = [aDecoder decodeObjectForKey:@"level"];
+    level = [n intValue];
+    finishTime = [aDecoder decodeObjectForKey:@"finishTime"];
+
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
-	[aCoder encodeObject:name forKey:@"name"];
-	[aCoder encodeObject:[NSNumber numberWithInt:level] forKey:@"level"];
-	[aCoder encodeObject:finishTime forKey:@"finishTime"];
+    [aCoder encodeObject:name forKey:@"name"];
+    [aCoder encodeObject:[NSNumber numberWithInt:level] forKey:@"level"];
+    [aCoder encodeObject:finishTime forKey:@"finishTime"];
 }
 
 @end

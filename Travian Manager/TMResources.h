@@ -25,10 +25,10 @@
 
 @interface TMResources : NSObject <NSCoding>
 
-@property (assign) float wood;
-@property (assign) float clay;
-@property (assign) float iron;
-@property (assign) float wheat;
+@property(assign) float wood;
+@property(assign) float clay;
+@property(assign) float iron;
+@property(assign) float wheat;
 
 - (void)updateResourcesFromProduction:(TMResourcesProduction *)production warehouse:(unsigned int)warehouse granary:(unsigned int)granary;
 

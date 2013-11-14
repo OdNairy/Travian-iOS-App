@@ -5,14 +5,14 @@
 #import <UIKit/UIKit.h>
 
 #ifndef AppDelegate
-	#define DEBUG_APP false
-	#define DEBUG_ANIMATION false
+#define DEBUG_APP false
+#define DEBUG_ANIMATION false
 #endif
 
 #ifdef FULL
 
 #if FULL
-	#define IsFULL true
+#define IsFULL true
 #else
 	#define IsFULL false
 #endif
@@ -29,19 +29,19 @@
 #endif
 
 #ifndef UserAgent
-	#define UserAgent @"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36"
+#define UserAgent @"Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1468.0 Safari/537.36"
 #endif
 
 #ifndef SupportEmail
-	#define SupportEmail @"mailto:matejkramny@gmail.com?subject=Travile Support"
+#define SupportEmail @"mailto:matejkramny@gmail.com?subject=Travile Support"
 #endif
 
 @class TMStorage;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UIAlertViewDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (weak, nonatomic) TMStorage *storage;
+@property(strong, nonatomic) UIWindow *window;
+@property(weak, nonatomic) TMStorage *storage;
 
 + (void)openSupportEmail;
 + (NSString *)getAppVersion;

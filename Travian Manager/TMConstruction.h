@@ -22,8 +22,8 @@
 
 @interface TMConstruction : NSObject <NSCoding>
 
-@property (strong, nonatomic) NSString *name; // As it appears in browser
-@property (assign) int level; // ^ same as above
-@property (strong, nonatomic) NSDate *finishTime; // ^
+@property(strong, nonatomic) NSString *name; // As it appears in browser
+@property(assign) int level; // ^ same as above
+@property(strong, nonatomic) NSDate *finishTime; // ^
 
 @end

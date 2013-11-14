@@ -6,7 +6,7 @@
 
 @interface TMBasicToggleCell : UITableViewCell
 
-@property (nonatomic, strong) IBOutlet UILabel *title;
-@property (nonatomic, strong) IBOutlet UISwitch *toggle;
+@property(nonatomic, strong) IBOutlet UILabel *title;
+@property(nonatomic, strong) IBOutlet UISwitch *toggle;
 
 @end

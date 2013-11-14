@@ -17,10 +17,10 @@
 
 @interface TMVillageOpenBuildingViewController : UITableViewController <TMBuildingMapProtocol, UITableViewDataSource, TMVillageOpenBuildingDelegate>
 
-@property (nonatomic, weak) id<TMVillageOpenBuildingDelegate> delegate;
-@property (nonatomic, weak) TMBuilding *building;
-@property (nonatomic, strong) NSArray *buildings;
-@property (nonatomic, strong) NSArray *otherBuildings;
-@property (assign) bool isBuildingSiteAvailableBuilding;
+@property(nonatomic, weak) id <TMVillageOpenBuildingDelegate> delegate;
+@property(nonatomic, weak) TMBuilding *building;
+@property(nonatomic, strong) NSArray *buildings;
+@property(nonatomic, strong) NSArray *otherBuildings;
+@property(assign) bool isBuildingSiteAvailableBuilding;
 
 @end

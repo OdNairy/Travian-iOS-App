@@ -22,6 +22,7 @@
 #define Travian_Manager_TravianPageParsingProtocol_h
 
 #import "TMPages.h"
+
 @class HTMLNode;
 
 @protocol TMPageParsingProtocol <NSObject>

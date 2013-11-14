@@ -24,17 +24,17 @@
 
 @interface TMHero : NSObject <NSCoding, TMPageParsingProtocol>
 
-@property (assign) int strengthPoints; // Attribute - Strength
-@property (assign) int offBonusPercentage; // Attribute - Offence bonus (%)
-@property (assign) int defBonusPercentage; // Attribute - Defence bonus (%)
-@property (assign) int resourceProductionPoints;
-@property (strong, nonatomic) TMResources *resourceProductionBoost; // Defines what resources are being boosted by hero
-@property (assign) int experience; // Hero experience
-@property (assign) int health; // Health of the hero (%)
-@property (assign) int speed; // Fields / hour
-@property (assign) bool isHidden; // Whether hero is hidden when village is attacked
-@property (assign) bool isAlive; // Hero alive/dead true/false
-@property (nonatomic, strong) NSArray *quests; // Array of quests available
+@property(assign) int strengthPoints; // Attribute - Strength
+@property(assign) int offBonusPercentage; // Attribute - Offence bonus (%)
+@property(assign) int defBonusPercentage; // Attribute - Defence bonus (%)
+@property(assign) int resourceProductionPoints;
+@property(strong, nonatomic) TMResources *resourceProductionBoost; // Defines what resources are being boosted by hero
+@property(assign) int experience; // Hero experience
+@property(assign) int health; // Health of the hero (%)
+@property(assign) int speed; // Fields / hour
+@property(assign) bool isHidden; // Whether hero is hidden when village is attacked
+@property(assign) bool isAlive; // Hero alive/dead true/false
+@property(nonatomic, strong) NSArray *quests; // Array of quests available
 
 - (void)parseHero:(HTMLNode *)node;
 - (void)parseAdventures:(HTMLNode *)node;

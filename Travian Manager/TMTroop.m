@@ -28,17 +28,17 @@
 
 - (id)initWithCoder:(NSCoder *)coder {
     self = [super init];
-    
-	name = [coder decodeObjectForKey:@"name"];
-	NSNumber *countObj = [coder decodeObjectForKey:@"count"];
-	count = [countObj intValue];
-	
-	return self;
+
+    name = [coder decodeObjectForKey:@"name"];
+    NSNumber *countObj = [coder decodeObjectForKey:@"count"];
+    count = [countObj intValue];
+
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)coder {
-	[coder encodeObject:name forKey:@"name"];
-	[coder encodeObject:[NSNumber numberWithInt:count] forKey:@"count"];
+    [coder encodeObject:name forKey:@"name"];
+    [coder encodeObject:[NSNumber numberWithInt:count] forKey:@"count"];
 }
 
 @end

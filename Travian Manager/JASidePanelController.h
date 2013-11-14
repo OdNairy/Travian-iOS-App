@@ -36,14 +36,14 @@ typedef enum _JASidePanelState {
     JASidePanelRightVisible
 } JASidePanelState;
 
-@interface JASidePanelController : UIViewController<UIGestureRecognizerDelegate>
+@interface JASidePanelController : UIViewController <UIGestureRecognizerDelegate>
 
 #pragma mark - Usage
 
 // set the panels
-@property (nonatomic, strong) UIViewController *leftPanel;   // optional
-@property (nonatomic, strong) UIViewController *centerPanel; // required
-@property (nonatomic, strong) UIViewController *rightPanel;  // optional
+@property(nonatomic, strong) UIViewController *leftPanel;   // optional
+@property(nonatomic, strong) UIViewController *centerPanel; // required
+@property(nonatomic, strong) UIViewController *rightPanel;  // optional
 
 // show the panels
 - (void)showLeftPanel:(BOOL)animated __attribute__((deprecated("Use -showLeftPanelAnimated: instead")));
@@ -60,33 +60,33 @@ typedef enum _JASidePanelState {
 - (void)toggleRightPanel:(id)sender;
 
 // Calling this while the left or right panel is visible causes the center panel to be completely hidden
-- (void)setCenterPanelHidden:(BOOL)centerPanelHidden animated:(BOOL)animated duration:(NSTimeInterval) duration;
+- (void)setCenterPanelHidden:(BOOL)centerPanelHidden animated:(BOOL)animated duration:(NSTimeInterval)duration;
 
 #pragma mark - Look & Feel
 
 // style
-@property (nonatomic) JASidePanelStyle style; // default is JASidePanelSingleActive
+@property(nonatomic) JASidePanelStyle style; // default is JASidePanelSingleActive
 
 // push side panels instead of overlapping them
-@property (nonatomic, assign) BOOL pushesSidePanels;
+@property(nonatomic, assign) BOOL pushesSidePanels;
 
 // size the left panel based on % of total screen width
-@property (nonatomic) CGFloat leftGapPercentage; 
+@property(nonatomic) CGFloat leftGapPercentage;
 
 // size the left panel based on this fixed size. overrides leftGapPercentage
-@property (nonatomic) CGFloat leftFixedWidth;
+@property(nonatomic) CGFloat leftFixedWidth;
 
 // the visible width of the left panel
-@property (nonatomic, readonly) CGFloat leftVisibleWidth;
+@property(nonatomic, readonly) CGFloat leftVisibleWidth;
 
 // size the right panel based on % of total screen width
-@property (nonatomic) CGFloat rightGapPercentage;
+@property(nonatomic) CGFloat rightGapPercentage;
 
 // size the right panel based on this fixed size. overrides rightGapPercentage
-@property (nonatomic) CGFloat rightFixedWidth;
+@property(nonatomic) CGFloat rightFixedWidth;
 
 // the visible width of the right panel
-@property (nonatomic, readonly) CGFloat rightVisibleWidth;
+@property(nonatomic, readonly) CGFloat rightVisibleWidth;
 
 // by default applies a black shadow to the container. override in sublcass to change
 - (void)styleContainer:(UIView *)container animate:(BOOL)animate duration:(NSTimeInterval)duration;
@@ -97,33 +97,33 @@ typedef enum _JASidePanelState {
 #pragma mark - Animation
 
 // the minimum % of total screen width the centerPanel.view must move for panGesture to succeed
-@property (nonatomic) CGFloat minimumMovePercentage;
+@property(nonatomic) CGFloat minimumMovePercentage;
 
 // the maximum time panel opening/closing should take. Actual time may be less if panGesture has already moved the view.
-@property (nonatomic) CGFloat maximumAnimationDuration;
+@property(nonatomic) CGFloat maximumAnimationDuration;
 
 // how long the bounce animation should take
-@property (nonatomic) CGFloat bounceDuration;
+@property(nonatomic) CGFloat bounceDuration;
 
 // how far the view should bounce
-@property (nonatomic) CGFloat bouncePercentage;
+@property(nonatomic) CGFloat bouncePercentage;
 
 // should the center panel bounce when you are panning open a left/right panel.
-@property (nonatomic) BOOL bounceOnSidePanelOpen; // defaults to YES
+@property(nonatomic) BOOL bounceOnSidePanelOpen; // defaults to YES
 
 // should the center panel bounce when you are panning closed a left/right panel.
-@property (nonatomic) BOOL bounceOnSidePanelClose; // defaults to NO
+@property(nonatomic) BOOL bounceOnSidePanelClose; // defaults to NO
 
 // while changing the center panel, should we bounce it offscreen?
-@property (nonatomic) BOOL bounceOnCenterPanelChange; // defaults to YES
+@property(nonatomic) BOOL bounceOnCenterPanelChange; // defaults to YES
 
 #pragma mark - Gesture Behavior
 
 // Determines whether the pan gesture is limited to the top ViewController in a UINavigationController/UITabBarController
-@property (nonatomic) BOOL panningLimitedToTopViewController; // default is YES
+@property(nonatomic) BOOL panningLimitedToTopViewController; // default is YES
 
 // Determines whether showing panels can be controlled through pan gestures, or only through buttons
-@property (nonatomic) BOOL recognizesPanGesture; // default is YES
+@property(nonatomic) BOOL recognizesPanGesture; // default is YES
 
 #pragma mark - Menu Buttons
 
@@ -136,37 +136,37 @@ typedef enum _JASidePanelState {
 #pragma mark - Nuts & Bolts
 
 // Current state of panels. Use KVO to monitor state changes
-@property (nonatomic, readonly) JASidePanelState state;
+@property(nonatomic, readonly) JASidePanelState state;
 
 // Whether or not the center panel is completely hidden
-@property (nonatomic, assign) BOOL centerPanelHidden;
+@property(nonatomic, assign) BOOL centerPanelHidden;
 
 // The currently visible panel
-@property (nonatomic, weak, readonly) UIViewController *visiblePanel;
+@property(nonatomic, weak, readonly) UIViewController *visiblePanel;
 
 // If set to yes, "shouldAutorotateToInterfaceOrientation:" will be passed to self.visiblePanel instead of handled directly
-@property (nonatomic, assign) BOOL shouldDelegateAutorotateToVisiblePanel; // defaults to YES
+@property(nonatomic, assign) BOOL shouldDelegateAutorotateToVisiblePanel; // defaults to YES
 
 // Determines whether or not the panel's views are removed when not visble. If YES, rightPanel & leftPanel's views are eligible for viewDidUnload
-@property (nonatomic, assign) BOOL canUnloadRightPanel; // defaults to NO
-@property (nonatomic, assign) BOOL canUnloadLeftPanel;  // defaults to NO
+@property(nonatomic, assign) BOOL canUnloadRightPanel; // defaults to NO
+@property(nonatomic, assign) BOOL canUnloadLeftPanel;  // defaults to NO
 
 // Determines whether or not the panel's views should be resized when they are displayed. If yes, the views will be resized to their visible width
-@property (nonatomic, assign) BOOL shouldResizeRightPanel; // defaults to NO
-@property (nonatomic, assign) BOOL shouldResizeLeftPanel;  // defaults to NO
+@property(nonatomic, assign) BOOL shouldResizeRightPanel; // defaults to NO
+@property(nonatomic, assign) BOOL shouldResizeLeftPanel;  // defaults to NO
 
 // Determines whether or not the center panel can be panned beyound the the visible area of the side panels
-@property (nonatomic, assign) BOOL allowRightOverpan; // defaults to YES
-@property (nonatomic, assign) BOOL allowLeftOverpan;  // defaults to YES
+@property(nonatomic, assign) BOOL allowRightOverpan; // defaults to YES
+@property(nonatomic, assign) BOOL allowLeftOverpan;  // defaults to YES
 
 // Determines whether or not the left or right panel can be swiped into view. Use if only way to view a panel is with a button
-@property (nonatomic, assign) BOOL allowLeftSwipe;  // defaults to YES
-@property (nonatomic, assign) BOOL allowRightSwipe; // defaults to YES
+@property(nonatomic, assign) BOOL allowLeftSwipe;  // defaults to YES
+@property(nonatomic, assign) BOOL allowRightSwipe; // defaults to YES
 
 // Containers for the panels.
-@property (nonatomic, strong, readonly) UIView *leftPanelContainer;
-@property (nonatomic, strong, readonly) UIView *rightPanelContainer;
-@property (nonatomic, strong, readonly) UIView *centerPanelContainer;
+@property(nonatomic, strong, readonly) UIView *leftPanelContainer;
+@property(nonatomic, strong, readonly) UIView *rightPanelContainer;
+@property(nonatomic, strong, readonly) UIView *centerPanelContainer;
 
 
 #pragma mark -

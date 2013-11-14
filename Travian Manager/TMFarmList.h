@@ -11,9 +11,9 @@
 
 @interface TMFarmList : NSObject <NSURLConnectionDataDelegate, NSURLConnectionDelegate, TMPageParsingProtocol>
 
-@property (nonatomic, strong) NSArray *farmLists;
-@property (assign) bool loaded;
-@property (assign) bool loading;
+@property(nonatomic, strong) NSArray *farmLists;
+@property(assign) bool loaded;
+@property(assign) bool loading;
 
 - (void)loadFarmList:(void (^)())completion;
 

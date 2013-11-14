@@ -8,10 +8,10 @@
 
 @interface TMSettingsViewController : UITableViewController
 
-@property (nonatomic, weak) TMSettings *settings;
-@property (nonatomic, weak) IBOutlet UISwitch *decimalResources;
-@property (nonatomic, weak) IBOutlet UISwitch *warehouseIndicator;
-@property (nonatomic, weak) IBOutlet UISwitch *loadAllAtOnce; // now called fast login
+@property(nonatomic, weak) TMSettings *settings;
+@property(nonatomic, weak) IBOutlet UISwitch *decimalResources;
+@property(nonatomic, weak) IBOutlet UISwitch *warehouseIndicator;
+@property(nonatomic, weak) IBOutlet UISwitch *loadAllAtOnce; // now called fast login
 
 - (IBAction)changedDecimalResources:(id)sender;
 - (IBAction)changedWarehouseIndicator:(id)sender;

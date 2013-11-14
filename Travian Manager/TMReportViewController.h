@@ -8,6 +8,6 @@
 
 @interface TMReportViewController : UITableViewController
 
-@property (nonatomic, weak) TMReport *report;
+@property(nonatomic, weak) TMReport *report;
 
 @end

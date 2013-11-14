@@ -11,13 +11,13 @@
 #import "TMReportViewController.h"
 
 @interface TMReportsViewController () {
-	TMStorage *storage;
-	MBProgressHUD *HUD;
-	UIAlertView *deleteAllAlert;
-	UIBarButtonItem *editButton;
-	
-	TMReport *selectedReport;
-	NSIndexPath *selectedIndexPath;
+    TMStorage *storage;
+    MBProgressHUD *HUD;
+    UIAlertView *deleteAllAlert;
+    UIBarButtonItem *editButton;
+
+    TMReport *selectedReport;
+    NSIndexPath *selectedIndexPath;
 }
 
 - (IBAction)deleteAll:(id)sender;
@@ -31,8 +31,7 @@
 
 static NSString *viewTitle;
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
+- (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
@@ -40,237 +39,230 @@ static NSString *viewTitle;
     return self;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-	
-	viewTitle = NSLocalizedString(@"Reports", @"View title for Reports");
-	
-	storage = [TMStorage sharedStorage];
-	//[self.navigationItem setLeftBarButtonItem:editButton animated:NO];
-	[self setTitle:viewTitle];
+
+    viewTitle = NSLocalizedString(@"Reports", @"View title for Reports");
+
+    storage = [TMStorage sharedStorage];
+    //[self.navigationItem setLeftBarButtonItem:editButton animated:NO];
+    [self setTitle:viewTitle];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload {
     [super viewDidUnload];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-	
-	if (!editButton) {
-		editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonClicked:)];
-	}
-	
-	if (selectedReport) {
-		selectedReport = nil;
-	} else {
-		[self.tableView reloadData];
-	}
+    [super viewWillAppear:animated];
+
+    if (!editButton) {
+        editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonClicked:)];
+    }
+
+    if (selectedReport) {
+        selectedReport = nil;
+    } else {
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-	[super setEditing:NO animated:animated];
+    [super setEditing:NO animated:animated];
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[[storage account] reports] count];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"ReportCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-	TMReport *r = [[[storage account] reports] objectAtIndex:indexPath.row];
+
+    TMReport *r = [[[storage account] reports] objectAtIndex:indexPath.row];
     cell.textLabel.text = [r name];
-	cell.detailTextLabel.text = @"";
-    
-	[AppDelegate setCellAppearance:cell forIndexPath:indexPath];
-	
+    cell.detailTextLabel.text = @"";
+
+    [AppDelegate setCellAppearance:cell forIndexPath:indexPath];
+
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-		// Make Mutable copy
-		NSMutableArray *a = [[[storage account] reports] mutableCopy];
-		// Delete the report (from Travian)
-		[[a objectAtIndex:indexPath.row] delete];
-		// Remove Object from Array
-		[a removeObjectAtIndex:indexPath.row];
-		// Put back immutable copy of the array
-		[storage account].reports = [a copy];
-		
+        // Make Mutable copy
+        NSMutableArray *a = [[[storage account] reports] mutableCopy];
+        // Delete the report (from Travian)
+        [[a objectAtIndex:indexPath.row] delete];
+        // Remove Object from Array
+        [a removeObjectAtIndex:indexPath.row];
+        // Put back immutable copy of the array
+        [storage account].reports = [a copy];
+
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-		[tableView reloadData]; // Refresh data source
+        [tableView reloadData]; // Refresh data source
     }
 }
 
 - (IBAction)deleteAll:(id)sender {
-	if ([[[storage account] reports] count] == 0) {
-		@autoreleasepool {
-			UIAlertView *a = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No reports", @"Shown as popup title when there are no reports to be deleted") message:NSLocalizedString(@"There are no reports that can be deleted", @"Popup message body stating that there are no deleteable reports") delegate:nil cancelButtonTitle:NSLocalizedString(@"Continue", nil) otherButtonTitles: nil];
-			[a show];
-		}
-		
-		[self setEditing:NO animated:YES];
-		
-		return;
-	}
-	
-	deleteAllAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete all?", @"Confirmation for delete-all reports dialog") message:NSLocalizedString(@"Are you sure you want to delete all reports?", @"Confirmation for delete-all reports dialog") delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
-	[deleteAllAlert show];
+    if ([[[storage account] reports] count] == 0) {
+        @autoreleasepool {
+            UIAlertView *a = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"No reports", @"Shown as popup title when there are no reports to be deleted") message:NSLocalizedString(@"There are no reports that can be deleted", @"Popup message body stating that there are no deleteable reports") delegate:nil cancelButtonTitle:NSLocalizedString(@"Continue", nil) otherButtonTitles:nil];
+            [a show];
+        }
+
+        [self setEditing:NO animated:YES];
+
+        return;
+    }
+
+    deleteAllAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Delete all?", @"Confirmation for delete-all reports dialog") message:NSLocalizedString(@"Are you sure you want to delete all reports?", @"Confirmation for delete-all reports dialog") delegate:self cancelButtonTitle:NSLocalizedString(@"No", nil) otherButtonTitles:NSLocalizedString(@"Yes", nil), nil];
+    [deleteAllAlert show];
 }
 
 - (IBAction)deleteAll:(id)sender userDidConfirm:(bool)confirmed {
-	if (!confirmed) {
-		[self deleteAll:sender];
-		return;
-	}
-	
-	int total = [[[storage account] reports] count];
-	
-	HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.navigationController.view];
-	[self.tabBarController.navigationController.view addSubview:HUD];
-	HUD.delegate = self;
-	HUD.labelText = [NSString stringWithFormat:NSLocalizedString(@"Deleted %d Reports", @"E.g.: 'Deleted 5 reports'. Message shown in HUD after some reports are deleted"), total];
-	
-	[HUD show:YES];
-	[self deleteTask:sender];
-	
-	NSMutableArray *rowCollection = [[NSMutableArray alloc] initWithCapacity:total];
-	for (int i = 0; i < total; i++) {
-		NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
-		[rowCollection addObject:indexPath];
-	}
-	
-	[HUD hide:YES afterDelay:0.5f];
-	[self setEditing:NO animated:YES];
-	
-	// Create the deleting effect..
-	[storage account].reports = [NSArray array];
-	[[self tableView] deleteRowsAtIndexPaths:rowCollection withRowAnimation:UITableViewRowAnimationFade];
+    if (!confirmed) {
+        [self deleteAll:sender];
+        return;
+    }
+
+    int total = [[[storage account] reports] count];
+
+    HUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.navigationController.view];
+    [self.tabBarController.navigationController.view addSubview:HUD];
+    HUD.delegate = self;
+    HUD.labelText = [NSString stringWithFormat:NSLocalizedString(@"Deleted %d Reports", @"E.g.: 'Deleted 5 reports'. Message shown in HUD after some reports are deleted"), total];
+
+    [HUD show:YES];
+    [self deleteTask:sender];
+
+    NSMutableArray *rowCollection = [[NSMutableArray alloc] initWithCapacity:total];
+    for (int i = 0; i < total; i++) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+        [rowCollection addObject:indexPath];
+    }
+
+    [HUD hide:YES afterDelay:0.5f];
+    [self setEditing:NO animated:YES];
+
+    // Create the deleting effect..
+    [storage account].reports = [NSArray array];
+    [[self tableView] deleteRowsAtIndexPaths:rowCollection withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (IBAction)deleteTask:(id)sender {
-	NSArray *rs = [[storage account] reports];
-	
-	NSString *data = @"del=Delete&s=0";
-	int nth = 1;
-	for (TMReport *r in rs) {
-		data = [data stringByAppendingFormat:@"&n%d=%@", nth++, [r deleteID]];
-	}
-	
-	NSData *myRequestData = [NSData dataWithBytes: [data UTF8String] length: [data length]];
-	NSString *stringUrl = [NSString stringWithFormat:@"http://%@.travian.%@/berichte.php", [[storage account] world], [[storage account] server]];
-	NSURL *url = [NSURL URLWithString: stringUrl];
-	
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL: url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
-	
-	// Set POST HTTP Headers if necessary
-	[request setHTTPMethod: @"POST"];
-	[request setHTTPBody: myRequestData];
-	[request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
-	
-	// Preserve any cookies received
-	[request setHTTPShouldHandleCookies:YES];
-	
-	@autoreleasepool {
-		NSURLConnection *c __unused = [[NSURLConnection alloc] initWithRequest:request delegate:nil startImmediately:YES];
-	}
+    NSArray *rs = [[storage account] reports];
+
+    NSString *data = @"del=Delete&s=0";
+    int nth = 1;
+    for (TMReport *r in rs) {
+        data = [data stringByAppendingFormat:@"&n%d=%@", nth++, [r deleteID]];
+    }
+
+    NSData *myRequestData = [NSData dataWithBytes:[data UTF8String] length:[data length]];
+    NSString *stringUrl = [NSString stringWithFormat:@"http://%@.travian.%@/berichte.php", [[storage account] world], [[storage account] server]];
+    NSURL *url = [NSURL URLWithString:stringUrl];
+
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url cachePolicy:NSURLCacheStorageNotAllowed timeoutInterval:60];
+
+    // Set POST HTTP Headers if necessary
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:myRequestData];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+
+    // Preserve any cookies received
+    [request setHTTPShouldHandleCookies:YES];
+
+    @autoreleasepool {
+        NSURLConnection *c __unused = [[NSURLConnection alloc] initWithRequest:request delegate:nil startImmediately:YES];
+    }
 }
 
 - (IBAction)editButtonClicked:(id)sender {
-	[self setEditing:![self isEditing] animated:YES];
+    [self setEditing:![self isEditing] animated:YES];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-	[super setEditing:editing animated:animated];
-	
-	if (editing) {
-		[self.tabBarController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonClicked:)] animated:YES];
-		[self.tabBarController.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAll:)] animated:YES];
-	} else {
-		[self.tabBarController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonClicked:)] animated:YES];
-		[self.tabBarController.navigationItem setRightBarButtonItem:nil animated:YES];
-	}
+    [super setEditing:editing animated:animated];
+
+    if (editing) {
+        [self.tabBarController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(editButtonClicked:)] animated:YES];
+        [self.tabBarController.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteAll:)] animated:YES];
+    } else {
+        [self.tabBarController.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(editButtonClicked:)] animated:YES];
+        [self.tabBarController.navigationItem setRightBarButtonItem:nil animated:YES];
+    }
 }
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	selectedIndexPath = indexPath;
-	
-	selectedReport = [storage.account.reports objectAtIndex:indexPath.row];
-	
-	if (![selectedReport parsed]) {
-		[selectedReport addObserver:self forKeyPath:@"parsed" options:NSKeyValueObservingOptionNew context:nil];
-		[selectedReport downloadAndParse];
-		
-		HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-		HUD.labelText = NSLocalizedString(@"Loading report", @"Shown when loading a report");
-		HUD.delegate = self;
-	} else {
-		[self performSegueWithIdentifier:@"openReport" sender:self];
-	}
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    selectedIndexPath = indexPath;
+
+    selectedReport = [storage.account.reports objectAtIndex:indexPath.row];
+
+    if (![selectedReport parsed]) {
+        [selectedReport addObserver:self forKeyPath:@"parsed" options:NSKeyValueObservingOptionNew context:nil];
+        [selectedReport downloadAndParse];
+
+        HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+        HUD.labelText = NSLocalizedString(@"Loading report", @"Shown when loading a report");
+        HUD.delegate = self;
+    } else {
+        [self performSegueWithIdentifier:@"openReport" sender:self];
+    }
 }
 
 #pragma mark - MBProgressHUDDelegate
 
 - (void)hudWasHidden:(MBProgressHUD *)hud {
-	// Remove HUD from screen when the HUD was hidden
-	[hud removeFromSuperview];
-	HUD = nil;
+    // Remove HUD from screen when the HUD was hidden
+    [hud removeFromSuperview];
+    HUD = nil;
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-	if (alertView == deleteAllAlert) {
-		if (buttonIndex == 1) {
-			// Selected Yes
-			[self deleteAll:self userDidConfirm:YES];
-		} else {
-			[self setEditing:NO animated:YES];
-		}
-	}
+    if (alertView == deleteAllAlert) {
+        if (buttonIndex == 1) {
+            // Selected Yes
+            [self deleteAll:self userDidConfirm:YES];
+        } else {
+            [self setEditing:NO animated:YES];
+        }
+    }
 }
 
 #pragma mark - KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-	if (object == selectedReport) {
-		if ([keyPath isEqualToString:@"parsed"]) {
-			[HUD hide:YES];
-			[self performSegueWithIdentifier:@"openReport" sender:self];
-		}
-	}
+    if (object == selectedReport) {
+        if ([keyPath isEqualToString:@"parsed"]) {
+            [HUD hide:YES];
+            [self performSegueWithIdentifier:@"openReport" sender:self];
+        }
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-	if ([segue.identifier isEqualToString:@"openReport"]) {
-		@try {
-			[selectedReport removeObserver:self forKeyPath:@"parsed"];
-		}
-		@catch (NSException *exception) {
-			// Remove observer from report.. If not observing do nothing.. Exception happens but we don't care
-		}
-		
-		TMReportViewController *destination = [segue destinationViewController];
-		destination.report = selectedReport;
-	}
+    if ([segue.identifier isEqualToString:@"openReport"]) {
+        @try {
+            [selectedReport removeObserver:self forKeyPath:@"parsed"];
+        }
+        @catch (NSException *exception) {
+            // Remove observer from report.. If not observing do nothing.. Exception happens but we don't care
+        }
+
+        TMReportViewController *destination = [segue destinationViewController];
+        destination.report = selectedReport;
+    }
 }
 
 @end

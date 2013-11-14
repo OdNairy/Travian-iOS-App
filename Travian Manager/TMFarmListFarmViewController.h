@@ -7,6 +7,6 @@
 
 @interface TMFarmListFarmViewController : UITableViewController
 
-@property (nonatomic, weak) TMFarmListEntryFarm *farm;
+@property(nonatomic, weak) TMFarmListEntryFarm *farm;
 
 @end

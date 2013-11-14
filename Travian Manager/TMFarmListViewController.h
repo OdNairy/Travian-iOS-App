@@ -16,7 +16,7 @@
 
 @interface TMFarmListViewController : UITableViewController <UIGestureRecognizerDelegate, UIScrollViewDelegate, UIActionSheetDelegate>
 
-@property (nonatomic) float openCellLastTX;
-@property (nonatomic, strong) NSIndexPath *openCellIndexPath;
+@property(nonatomic) float openCellLastTX;
+@property(nonatomic, strong) NSIndexPath *openCellIndexPath;
 
 @end

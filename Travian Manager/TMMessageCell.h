@@ -8,12 +8,12 @@
 
 @interface TMMessageCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *senderLabel;
-@property (weak, nonatomic) IBOutlet UILabel *subjectLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *unreadImage;
-@property (weak, nonatomic) IBOutlet UIImageView *deleteCheckboxImage;
-@property (weak, nonatomic) TMMessage *message;
+@property(weak, nonatomic) IBOutlet UILabel *senderLabel;
+@property(weak, nonatomic) IBOutlet UILabel *subjectLabel;
+@property(weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *unreadImage;
+@property(weak, nonatomic) IBOutlet UIImageView *deleteCheckboxImage;
+@property(weak, nonatomic) TMMessage *message;
 
 - (void)configure;
 - (void)wasSelectedWhileEditing;

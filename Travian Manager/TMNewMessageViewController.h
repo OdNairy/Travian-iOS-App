@@ -33,10 +33,10 @@
 
 @interface TMNewMessageViewController : UITableViewController <UIAlertViewDelegate, MBProgressHUDDelegate>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
-@property (weak, nonatomic) TMMessage *replyToMessage;
-@property (weak, nonatomic) TMMessage *forwardMessage;
-@property (weak, nonatomic) id <TMNewMessageDelegate> delegate;
+@property(weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
+@property(weak, nonatomic) TMMessage *replyToMessage;
+@property(weak, nonatomic) TMMessage *forwardMessage;
+@property(weak, nonatomic) id <TMNewMessageDelegate> delegate;
 
 - (void)closeKeyboard;
 - (IBAction)sendButtonPressed:(id)sender;
