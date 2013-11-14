@@ -1868,8 +1868,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Matej Kramny (8FN4JHTL4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Matej Kramny (8FN4JHTL4E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -1885,8 +1885,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				PROVISIONING_PROFILE = "816A8BD6-D1B4-4992-994C-5F172E94D191";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "816A8BD6-D1B4-4992-994C-5F172E94D191";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1902,8 +1902,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Matej Kramny";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matej Kramny";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -1913,8 +1913,8 @@
 				HEADER_SEARCH_PATHS = "${SDK_DIR}/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "0DCF36B5-75BB-4E6C-ADAC-F84014100C83";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0DCF36B5-75BB-4E6C-ADAC-F84014100C83";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1962,8 +1962,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Travian Manager/Travile.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Matej Kramny";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matej Kramny";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -1985,8 +1985,8 @@
 					"\"$(SRCROOT)/Travian Manager/Flurry\"",
 				);
 				PRODUCT_NAME = Travile;
-				PROVISIONING_PROFILE = "0DCF36B5-75BB-4E6C-ADAC-F84014100C83";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "0DCF36B5-75BB-4E6C-ADAC-F84014100C83";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1996,8 +1996,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Travian Manager/Travile.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Matej Kramny (8FN4JHTL4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Matej Kramny (8FN4JHTL4E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2022,8 +2022,8 @@
 					"\"$(SRCROOT)/Travian Manager/Flurry\"",
 				);
 				PRODUCT_NAME = "Travile Lite";
-				PROVISIONING_PROFILE = "58D3CE28-039F-48E3-B190-7B014540BFFA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "58D3CE28-039F-48E3-B190-7B014540BFFA";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2033,8 +2033,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = "Travian Manager/Travile.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Matej Kramny";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Matej Kramny";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)\"",
@@ -2056,8 +2056,8 @@
 					"\"$(SRCROOT)/Travian Manager/Flurry\"",
 				);
 				PRODUCT_NAME = "Travile Lite";
-				PROVISIONING_PROFILE = "F99CAE90-E02B-4C65-9983-D6A8F0552C82";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "F99CAE90-E02B-4C65-9983-D6A8F0552C82";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
