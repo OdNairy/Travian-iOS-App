@@ -5,31 +5,31 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>1ABC066F-1846-48AA-8DA2-92E887BABCB2</string>
+	<string>7B76A831-7C0C-4723-9823-17C3EB183CD8</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Travian Manager</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>01A98E41-7D54-48BF-BD05-BDC30FE60185</key>
+		<string>ssh://github.com/OdNairy/Travian-iOS-App.git</string>
 		<key>1C386DED-EF9B-4F12-9FA0-0DF214441BAE</key>
 		<string>ssh://github.com/matejkramny/MKModalOverlay.git</string>
-		<key>225E32A1-282F-47C5-BFAE-F4557AF1F798</key>
-		<string>https://github.com/matejkramny/Travian-iOS-App</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Travian Manager.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>01A98E41-7D54-48BF-BD05-BDC30FE60185</key>
+		<string>../..</string>
 		<key>1C386DED-EF9B-4F12-9FA0-0DF214441BAE</key>
 		<string>../../Travian Manager/MKModalOverlay</string>
-		<key>225E32A1-282F-47C5-BFAE-F4557AF1F798</key>
-		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/matejkramny/Travian-iOS-App</string>
+	<string>ssh://github.com/OdNairy/Travian-iOS-App.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>225E32A1-282F-47C5-BFAE-F4557AF1F798</string>
+	<string>01A98E41-7D54-48BF-BD05-BDC30FE60185</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -44,7 +44,7 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>225E32A1-282F-47C5-BFAE-F4557AF1F798</string>
+			<string>01A98E41-7D54-48BF-BD05-BDC30FE60185</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Travian-iOS-App</string>
 		</dict>

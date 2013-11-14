@@ -53,13 +53,14 @@ typedef enum {
 @property(assign) bool notificationPending; // There is a notification. Notify user to either skipNotification or view it in safari.
 @property(nonatomic, strong) NSString *progressIndicator; // Label on HUD
 
-@property(assign) long last_updated; // UNIX timestamp tells when last refreshed..
+@property(assign) NSTimeInterval last_updated; // UNIX timestamp tells when last refreshed..
 
 @property(nonatomic, strong) NSArray *cookies; // cookies store. Preserved in the storage to avoid logging in multiple times.
 
 - (void)activateAccount;
 - (void)activateAccountWithPassword:(NSString *)passwd;
 - (void)refreshAccountWithMap:(AReloadMap)map;
+- (void)refreshAccountSynchonioslyWithMap:(AReloadMap)map;
 - (void)deactivateAccount;
 
 - (void)skipNotification;

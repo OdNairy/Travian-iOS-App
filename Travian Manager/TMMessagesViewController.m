@@ -116,6 +116,8 @@ static NSString *viewTitle;
             selectedMessage = nil;
         else
             return;
+
+
     }
 
     if (!cells) {

@@ -806,6 +806,7 @@
 				4F9ADA5E1719E9D400154E69 /* Default@2x.png */,
 				4F9ADA601719EAC500154E69 /* Default-568h@2x.png */,
 				4F57044715CEE126001614AC /* Resources */,
+				FEA50F581834C2F100355E29 /* iPad */,
 				4F095212155C767800C15D6E /* Travian Manager */,
 				4F09520B155C767800C15D6E /* Frameworks */,
 				4F095209155C767800C15D6E /* Products */,
@@ -1249,6 +1250,13 @@
 			name = SidePanel;
 			sourceTree = "<group>";
 		};
+		FEA50F581834C2F100355E29 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1295,6 +1303,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0460;
+				TargetAttributes = {
+					4F095207155C767700C15D6E = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = 4F095202155C767700C15D6E /* Build configuration list for PBXProject "Travian Manager" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1942,7 +1959,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Travian Manager/Travile.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Travian Manager/Icons\"",
@@ -1953,7 +1970,7 @@
 				PRODUCT_NAME = Travile;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1976,7 +1993,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = "Travian Manager/Travile.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Travian Manager/Icons\"",
@@ -1987,7 +2004,7 @@
 				PRODUCT_NAME = Travile;
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

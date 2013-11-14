@@ -170,7 +170,8 @@ static NSString *farmList = @"build.php?tt=99&id=39";
         [self performLoginWithPassword:passwd];
     } else {
         // Probably valid cookies?
-        [self refreshAccountWithMap:ARAccount];
+        [self refreshAccountSynchonioslyWithMap:ARAccount];
+//        [self refreshAccountWithMap:ARAccount];
     }
 }
 
@@ -193,6 +194,15 @@ static NSString *farmList = @"build.php?tt=99&id=39";
     status = ANotLoggedIn | ALoggingIn;
 
     loginConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:YES];
+}
+
+-(void)refreshAccountSynchonioslyWithMap:(AReloadMap)map{
+    [self refreshAccountWithMap:map];
+    
+    while (self.status != ARefreshed) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    NSLog(@"Refresh finished");
 }
 
 - (void)refreshAccountWithMap:(AReloadMap)map {
@@ -555,6 +565,10 @@ static NSString *farmList = @"build.php?tt=99&id=39";
 
     if (!settings.fastLogin) {
         for (TMVillage *vil in villages) {
+            // TODO: add settings property for human-like delays
+#ifndef SLEEP_FOR_DOWNLOAD
+            sleep(2+ arc4random()%4);
+#endif
             [vil downloadAndParse]; // Tell each village to download its data
         }
     }

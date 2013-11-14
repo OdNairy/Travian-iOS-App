@@ -66,7 +66,7 @@ static TMSidePanelViewController *instance;
 
             [[UIApplication sharedApplication] scheduleLocalNotification:local];
 
-            NSLog(@"Village %@ task: %@ to %d at %@ [class = %@]", village.name, task.name, task.level, task.finishTime, NSStringFromClass([task class]));
+            NSLog(@"'%@' task: %@ to %d at %@", village.name, task.name, task.level, task.finishTime);
         }
     }
 }

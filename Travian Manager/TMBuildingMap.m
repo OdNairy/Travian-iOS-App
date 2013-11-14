@@ -171,8 +171,8 @@ const float vilHeight = 534.0f;
 
     for (int i = 0; i < [hbs count]; i++) {
         if ([[hbs objectAtIndex:i] isKindOfClass:[NSArray class]]) {
-            for (TMBuilding *hbuilding in [hbs objectAtIndex:i]) {
-                drawBuilding(hbuilding, true);
+            for (TMBuilding *hidden_building in [hbs objectAtIndex:i]) {
+                drawBuilding(hidden_building, true);
             }
         } else {
             drawBuilding([hbs objectAtIndex:i], true);
@@ -183,7 +183,7 @@ const float vilHeight = 534.0f;
 }
 
 - (void)setSelectedButtonAtIndex:(NSInteger)index {
-    // Unselect other buttons at first
+    // deselect other buttons at first
     for (int i = 0; i < [bsButtons count]; i++) {
         UIButton *button = [bsButtons objectAtIndex:i];
 

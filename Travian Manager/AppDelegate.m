@@ -55,8 +55,14 @@ void uncaughtExceptionHandler(NSException *exception) {
 //    [[UIApplication sharedApplication]registerForRemoteNotificationTypes:(UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound)];
 
 
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     return YES;
+}
+
+-(void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler{
+    [UIApplication sharedApplication].applicationIconBadgeNumber++;
+    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
@@ -160,7 +166,7 @@ static BOOL hasExpired = false;
 
     // Button (normal state)
     UIImage *button = [[UIImage imageNamed:@"ButtonStateNormal.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
-    // Lanscape
+    // Landscape
     UIImage *buttonLandscape = [[UIImage imageNamed:@"ButtonStyleNormalLandscape.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 5, 0, 5)];
 
     // Set Button
@@ -186,13 +192,13 @@ static UIImageView *roundedTableCellSelectedBackgroundBottom;
 static UIImageView *roundedTableCellSelectedBackgroundMiddle;
 static UIImage *detailAccessoryViewImage;
 static UIImageView *darkCellSelectedBackground;
-static UIImage *darkSelecedCellImage;
+static UIImage *darkSelectedCellImage;
 static UIImage *cellOddBackground;
 static UIImage *cellEvenBackground;
 
 // Set appearance of cell based on indexPath
 + (void)setCellAppearance:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
-    UIView *bg = [[UIView alloc] init];
+    UIView *bg;
 
     if (!cellOddBackground)
         cellOddBackground = [[UIImage imageNamed:@"CellOdd.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
@@ -221,8 +227,8 @@ static UIImage *cellEvenBackground;
 
 + (void)setDarkCellAppearance:(UITableViewCell *)cell forIndexPath:(NSIndexPath *)indexPath {
     if (!darkCellSelectedBackground) {
-        darkSelecedCellImage = [[UIImage imageNamed:@"DarkSelectedCell.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
-        darkCellSelectedBackground = [[UIImageView alloc] initWithImage:darkSelecedCellImage];
+        darkSelectedCellImage = [[UIImage imageNamed:@"DarkSelectedCell.png"] stretchableImageWithLeftCapWidth:0 topCapHeight:0];
+        darkCellSelectedBackground = [[UIImageView alloc] initWithImage:darkSelectedCellImage];
     }
 
     // Background
@@ -233,7 +239,7 @@ static UIImage *cellEvenBackground;
     cell.detailTextLabel.textColor = [UIColor whiteColor];
 
     // Selected background
-    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:darkSelecedCellImage];
+    cell.selectedBackgroundView = [[UIImageView alloc] initWithImage:darkSelectedCellImage];
     cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
 }
